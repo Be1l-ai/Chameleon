@@ -7,7 +7,7 @@ This module contains the business logic for running a Chameleon game session,
 including player management, word selection, voting, and win condition checking.
 """
 
-from typing import List, Optional, Dict, Any
+from typing import List, Optional, Dict, Any, Tuple
 import random
 
 
@@ -86,7 +86,7 @@ class GameSession:
             vote_counts[voted_for] += 1
         return vote_counts
 
-    def check_chameleon_caught(self) -> tuple[bool, Optional[int]]:
+    def check_chameleon_caught(self) -> Tuple[bool, Optional[int]]:
         """
         Check if the Chameleon was caught (received the most votes).
 
@@ -111,7 +111,7 @@ class WordListManager:
         """
         self.word_lists = word_lists
 
-    def get_random_word(self, category: Optional[str] = None) -> tuple[str, str]:
+    def get_random_word(self, category: Optional[str] = None) -> Tuple[str, str]:
         """
         Get a random word from a category.
 
