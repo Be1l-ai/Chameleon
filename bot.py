@@ -58,14 +58,9 @@ intents.presences = True
 """
 
 intents = discord.Intents.default()
-
-"""
-Uncomment this if you want to use prefix (normal) commands.
-It is recommended to use slash commands and therefore not use prefix commands.
-
-If you want to use prefix commands, make sure to also enable the intent below in the Discord developer portal.
-"""
-# intents.message_content = True
+intents.message_content = True
+intents.members = True
+intents.reactions = True
 
 # Setup both of the loggers
 
@@ -122,7 +117,7 @@ logger.addHandler(file_handler)
 class DiscordBot(commands.Bot):
     def __init__(self) -> None:
         super().__init__(
-            command_prefix=commands.when_mentioned_or(os.getenv("PREFIX")),
+            command_prefix=commands.when_mentioned_or(os.getenv("COMMAND_PREFIX", "!")),
             intents=intents,
             help_command=None,
         )
@@ -136,7 +131,7 @@ class DiscordBot(commands.Bot):
         """
         self.logger = logger
         self.database = None
-        self.bot_prefix = os.getenv("PREFIX")
+        self.bot_prefix = os.getenv("COMMAND_PREFIX", "!")
         self.invite_link = os.getenv("INVITE_LINK")
 
     async def init_db(self) -> None:
@@ -171,7 +166,7 @@ class DiscordBot(commands.Bot):
         """
         Setup the game status task of the bot.
         """
-        statuses = ["with you!", "with Krypton!", "with humans!"]
+        statuses = ["Chameleon Game!", "Find the impostor!"]
         await self.change_presence(activity=discord.Game(random.choice(statuses)))
 
     @status_task.before_loop
@@ -287,4 +282,4 @@ class DiscordBot(commands.Bot):
 
 
 bot = DiscordBot()
-bot.run(os.getenv("TOKEN"))
+bot.run(os.getenv("DISCORD_BOT_TOKEN"))
