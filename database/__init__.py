@@ -1,9 +1,10 @@
+# Copyright 2019-Present kkrypt0nn (Krypton)
+# Copyright 2025 Be1l-ai - Modified for Chameleon Bot
+# Licensed under the Apache License, Version 2.0
+#
+# Original work: https://github.com/kkrypt0nn/Python-Discord-Bot-Template
 """
-Copyright © Krypton 2019-Present - https://github.com/kkrypt0nn (https://krypton.ninja)
-Description:
-🐍 A simple template to start to code your own and personalized Discord bot in Python
-
-Version: 6.4.0
+Database manager module.
 """
 
 import aiosqlite
@@ -13,9 +14,7 @@ class DatabaseManager:
     def __init__(self, *, connection: aiosqlite.Connection) -> None:
         self.connection = connection
 
-    async def add_warn(
-        self, user_id: int, server_id: int, moderator_id: int, reason: str
-    ) -> int:
+    async def add_warn(self, user_id: int, server_id: int, moderator_id: int, reason: str) -> int:
         """
         This function will add a warn to the database.
 

@@ -1,0 +1,11 @@
+Chameleon Discord Bot
+Copyright 2025 Be1l-ai
+
+This project is based on the Python Discord Bot Template:
+https://github.com/kkrypt0nn/Python-Discord-Bot-Template
+
+Original work Copyright 2019-Present Krypton (kkrypt0nn)
+Licensed under the Apache License, Version 2.0
+
+Modifications:
+This fork has been modified to create a Chameleon game bot. Currently no modifications have been made to the original template beyond preparation for the Chameleon game implementation.

@@ -1,9 +1,10 @@
+# Copyright 2019-Present kkrypt0nn (Krypton)
+# Copyright 2025 Be1l-ai - Modified for Chameleon Bot
+# Licensed under the Apache License, Version 2.0
+#
+# Original work: https://github.com/kkrypt0nn/Python-Discord-Bot-Template
 """
-Copyright © Krypton 2019-Present - https://github.com/kkrypt0nn (https://krypton.ninja)
-Description:
-🐍 A simple template to start to code your own and personalized Discord bot in Python
-
-Version: 6.4.0
+Discord bot main module.
 """
 
 import json
@@ -57,14 +58,9 @@ intents.presences = True
 """
 
 intents = discord.Intents.default()
-
-"""
-Uncomment this if you want to use prefix (normal) commands.
-It is recommended to use slash commands and therefore not use prefix commands.
-
-If you want to use prefix commands, make sure to also enable the intent below in the Discord developer portal.
-"""
-# intents.message_content = True
+intents.message_content = True
+intents.members = True
+intents.reactions = True
 
 # Setup both of the loggers
 
@@ -121,7 +117,7 @@ logger.addHandler(file_handler)
 class DiscordBot(commands.Bot):
     def __init__(self) -> None:
         super().__init__(
-            command_prefix=commands.when_mentioned_or(os.getenv("PREFIX")),
+            command_prefix=commands.when_mentioned_or(os.getenv("COMMAND_PREFIX", "!")),
             intents=intents,
             help_command=None,
         )
@@ -135,17 +131,12 @@ class DiscordBot(commands.Bot):
         """
         self.logger = logger
         self.database = None
-        self.bot_prefix = os.getenv("PREFIX")
+        self.bot_prefix = os.getenv("COMMAND_PREFIX", "!")
         self.invite_link = os.getenv("INVITE_LINK")
 
     async def init_db(self) -> None:
-        async with aiosqlite.connect(
-            f"{os.path.realpath(os.path.dirname(__file__))}/database/database.db"
-        ) as db:
-            with open(
-                f"{os.path.realpath(os.path.dirname(__file__))}/database/schema.sql",
-                encoding = "utf-8"
-            ) as file:
+        async with aiosqlite.connect(f"{os.path.realpath(os.path.dirname(__file__))}/database/database.db") as db:
+            with open(f"{os.path.realpath(os.path.dirname(__file__))}/database/schema.sql", encoding="utf-8") as file:
                 await db.executescript(file.read())
             await db.commit()
 
@@ -161,16 +152,14 @@ class DiscordBot(commands.Bot):
                     self.logger.info(f"Loaded extension '{extension}'")
                 except Exception as e:
                     exception = f"{type(e).__name__}: {e}"
-                    self.logger.error(
-                        f"Failed to load extension {extension}\n{exception}"
-                    )
+                    self.logger.error(f"Failed to load extension {extension}\n{exception}")
 
     @tasks.loop(minutes=1.0)
     async def status_task(self) -> None:
         """
         Setup the game status task of the bot.
         """
-        statuses = ["with you!", "with Krypton!", "with humans!"]
+        statuses = ["Chameleon Game!", "Find the impostor!"]
         await self.change_presence(activity=discord.Game(random.choice(statuses)))
 
     @status_task.before_loop
@@ -187,17 +176,13 @@ class DiscordBot(commands.Bot):
         self.logger.info(f"Logged in as {self.user.name}")
         self.logger.info(f"discord.py API version: {discord.__version__}")
         self.logger.info(f"Python version: {platform.python_version()}")
-        self.logger.info(
-            f"Running on: {platform.system()} {platform.release()} ({os.name})"
-        )
+        self.logger.info(f"Running on: {platform.system()} {platform.release()} ({os.name})")
         self.logger.info("-------------------")
         await self.init_db()
         await self.load_cogs()
         self.status_task.start()
         self.database = DatabaseManager(
-            connection=await aiosqlite.connect(
-                f"{os.path.realpath(os.path.dirname(__file__))}/database/database.db"
-            )
+            connection=await aiosqlite.connect(f"{os.path.realpath(os.path.dirname(__file__))}/database/database.db")
         )
 
     async def on_message(self, message: discord.Message) -> None:
@@ -245,9 +230,7 @@ class DiscordBot(commands.Bot):
             )
             await context.send(embed=embed)
         elif isinstance(error, commands.NotOwner):
-            embed = discord.Embed(
-                description="You are not the owner of the bot!", color=0xE02B2B
-            )
+            embed = discord.Embed(description="You are not the owner of the bot!", color=0xE02B2B)
             await context.send(embed=embed)
             if context.guild:
                 self.logger.warning(
@@ -286,4 +269,4 @@ class DiscordBot(commands.Bot):
 
 
 bot = DiscordBot()
-bot.run(os.getenv("TOKEN"))
+bot.run(os.getenv("DISCORD_BOT_TOKEN"))
