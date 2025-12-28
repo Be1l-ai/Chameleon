@@ -1,9 +1,10 @@
+# Copyright 2019-Present kkrypt0nn (Krypton)
+# Copyright 2025 Be1l-ai - Modified for Chameleon Bot
+# Licensed under the Apache License, Version 2.0
+#
+# Original work: https://github.com/kkrypt0nn/Python-Discord-Bot-Template
 """
-Copyright © Krypton 2019-Present - https://github.com/kkrypt0nn (https://krypton.ninja)
-Description:
-🐍 A simple template to start to code your own and personalized Discord bot in Python
-
-Version: 6.4.0
+Template cog for creating new commands.
 """
 
 from discord.ext import commands

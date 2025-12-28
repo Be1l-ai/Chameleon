@@ -136,6 +136,14 @@ the [tags on this repository](https://github.com/kkrypt0nn/Python-Discord-Bot-Te
 
 - [Python 3.12.9](https://www.python.org/)
 
+## Attribution
+
+This project is based on the [Python Discord Bot Template](https://github.com/kkrypt0nn/Python-Discord-Bot-Template) by [kkrypt0nn](https://github.com/kkrypt0nn).
+
+Original work Copyright 2019-Present Krypton (kkrypt0nn) - Licensed under the Apache License, Version 2.0.
+
+The template has been forked and modified to create a Chameleon game bot.
+
 ## License
 
 This project is licensed under the Apache License 2.0 - see the [LICENSE.md](LICENSE.md) file for details
