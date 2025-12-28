@@ -1,0 +1,32 @@
+{
+  "animals": [
+    "dog",
+    "cat",
+    "elephant",
+    "giraffe",
+    "lion",
+    "tiger",
+    "bear",
+    "monkey"
+  ],
+  "colors": [
+    "red",
+    "blue",
+    "green",
+    "yellow",
+    "purple",
+    "orange",
+    "pink",
+    "brown"
+  ],
+  "food": [
+    "pizza",
+    "burger",
+    "pasta",
+    "sushi",
+    "tacos",
+    "salad",
+    "steak",
+    "soup"
+  ]
+}

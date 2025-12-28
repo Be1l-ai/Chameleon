@@ -135,13 +135,8 @@ class DiscordBot(commands.Bot):
         self.invite_link = os.getenv("INVITE_LINK")
 
     async def init_db(self) -> None:
-        async with aiosqlite.connect(
-            f"{os.path.realpath(os.path.dirname(__file__))}/database/database.db"
-        ) as db:
-            with open(
-                f"{os.path.realpath(os.path.dirname(__file__))}/database/schema.sql",
-                encoding = "utf-8"
-            ) as file:
+        async with aiosqlite.connect(f"{os.path.realpath(os.path.dirname(__file__))}/database/database.db") as db:
+            with open(f"{os.path.realpath(os.path.dirname(__file__))}/database/schema.sql", encoding="utf-8") as file:
                 await db.executescript(file.read())
             await db.commit()
 
@@ -157,9 +152,7 @@ class DiscordBot(commands.Bot):
                     self.logger.info(f"Loaded extension '{extension}'")
                 except Exception as e:
                     exception = f"{type(e).__name__}: {e}"
-                    self.logger.error(
-                        f"Failed to load extension {extension}\n{exception}"
-                    )
+                    self.logger.error(f"Failed to load extension {extension}\n{exception}")
 
     @tasks.loop(minutes=1.0)
     async def status_task(self) -> None:
@@ -183,17 +176,13 @@ class DiscordBot(commands.Bot):
         self.logger.info(f"Logged in as {self.user.name}")
         self.logger.info(f"discord.py API version: {discord.__version__}")
         self.logger.info(f"Python version: {platform.python_version()}")
-        self.logger.info(
-            f"Running on: {platform.system()} {platform.release()} ({os.name})"
-        )
+        self.logger.info(f"Running on: {platform.system()} {platform.release()} ({os.name})")
         self.logger.info("-------------------")
         await self.init_db()
         await self.load_cogs()
         self.status_task.start()
         self.database = DatabaseManager(
-            connection=await aiosqlite.connect(
-                f"{os.path.realpath(os.path.dirname(__file__))}/database/database.db"
-            )
+            connection=await aiosqlite.connect(f"{os.path.realpath(os.path.dirname(__file__))}/database/database.db")
         )
 
     async def on_message(self, message: discord.Message) -> None:
@@ -241,9 +230,7 @@ class DiscordBot(commands.Bot):
             )
             await context.send(embed=embed)
         elif isinstance(error, commands.NotOwner):
-            embed = discord.Embed(
-                description="You are not the owner of the bot!", color=0xE02B2B
-            )
+            embed = discord.Embed(description="You are not the owner of the bot!", color=0xE02B2B)
             await context.send(embed=embed)
             if context.guild:
                 self.logger.warning(

@@ -14,9 +14,7 @@ class DatabaseManager:
     def __init__(self, *, connection: aiosqlite.Connection) -> None:
         self.connection = connection
 
-    async def add_warn(
-        self, user_id: int, server_id: int, moderator_id: int, reason: str
-    ) -> int:
+    async def add_warn(self, user_id: int, server_id: int, moderator_id: int, reason: str) -> int:
         """
         This function will add a warn to the database.
 

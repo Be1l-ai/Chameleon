@@ -48,18 +48,14 @@ class Owner(commands.Cog, name="owner"):
             )
             await context.send(embed=embed)
             return
-        embed = discord.Embed(
-            description="The scope must be `global` or `guild`.", color=0xE02B2B
-        )
+        embed = discord.Embed(description="The scope must be `global` or `guild`.", color=0xE02B2B)
         await context.send(embed=embed)
 
     @commands.command(
         name="unsync",
         description="Unsynchonizes the slash commands.",
     )
-    @app_commands.describe(
-        scope="The scope of the sync. Can be `global`, `current_guild` or `guild`"
-    )
+    @app_commands.describe(scope="The scope of the sync. Can be `global`, `current_guild` or `guild`")
     @commands.is_owner()
     async def unsync(self, context: Context, scope: str) -> None:
         """
@@ -87,9 +83,7 @@ class Owner(commands.Cog, name="owner"):
             )
             await context.send(embed=embed)
             return
-        embed = discord.Embed(
-            description="The scope must be `global` or `guild`.", color=0xE02B2B
-        )
+        embed = discord.Embed(description="The scope must be `global` or `guild`.", color=0xE02B2B)
         await context.send(embed=embed)
 
     @commands.hybrid_command(
@@ -108,14 +102,10 @@ class Owner(commands.Cog, name="owner"):
         try:
             await self.bot.load_extension(f"cogs.{cog}")
         except Exception:
-            embed = discord.Embed(
-                description=f"Could not load the `{cog}` cog.", color=0xE02B2B
-            )
+            embed = discord.Embed(description=f"Could not load the `{cog}` cog.", color=0xE02B2B)
             await context.send(embed=embed)
             return
-        embed = discord.Embed(
-            description=f"Successfully loaded the `{cog}` cog.", color=0xBEBEFE
-        )
+        embed = discord.Embed(description=f"Successfully loaded the `{cog}` cog.", color=0xBEBEFE)
         await context.send(embed=embed)
 
     @commands.hybrid_command(
@@ -134,14 +124,10 @@ class Owner(commands.Cog, name="owner"):
         try:
             await self.bot.unload_extension(f"cogs.{cog}")
         except Exception:
-            embed = discord.Embed(
-                description=f"Could not unload the `{cog}` cog.", color=0xE02B2B
-            )
+            embed = discord.Embed(description=f"Could not unload the `{cog}` cog.", color=0xE02B2B)
             await context.send(embed=embed)
             return
-        embed = discord.Embed(
-            description=f"Successfully unloaded the `{cog}` cog.", color=0xBEBEFE
-        )
+        embed = discord.Embed(description=f"Successfully unloaded the `{cog}` cog.", color=0xBEBEFE)
         await context.send(embed=embed)
 
     @commands.hybrid_command(
@@ -160,14 +146,10 @@ class Owner(commands.Cog, name="owner"):
         try:
             await self.bot.reload_extension(f"cogs.{cog}")
         except Exception:
-            embed = discord.Embed(
-                description=f"Could not reload the `{cog}` cog.", color=0xE02B2B
-            )
+            embed = discord.Embed(description=f"Could not reload the `{cog}` cog.", color=0xE02B2B)
             await context.send(embed=embed)
             return
-        embed = discord.Embed(
-            description=f"Successfully reloaded the `{cog}` cog.", color=0xBEBEFE
-        )
+        embed = discord.Embed(description=f"Successfully reloaded the `{cog}` cog.", color=0xBEBEFE)
         await context.send(embed=embed)
 
     @commands.hybrid_command(
